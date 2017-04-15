@@ -1,0 +1,55 @@
+header.header
+  div.header__row
+    div.header__logo-box
+      a.header__logo-box__logo(href="#")
+      div.header__logo-box__add-question(ng-click="ctrl.defaultClick()")
+      div.header__logo-box__opt-btn(ng-click="ctrl.setMobileOptionVal()" ng-class="ctrl.mobileOptions == true ? 'on' : ''") options
+    div.header__option-box(ng-class="ctrl.mobileOptions == true ? 'on' : ''")
+      div.header__option-box__item
+        input(type="radio" id="my-shelf" name="show" ng-click="ctrl.currentFilter = 'my_shelf'; this.filterOptions['string'] = {};")
+        label(for="my-shelf") My shelf
+      div.header__option-box__item
+        input(type="radio" id="all-questions" name="show" ng-click="ctrl.currentFilter = 'all'; this.filterOptions['string'] = {};" checked="checked")
+        label(for="all-questions") All questions
+      div.header__option-box__item
+        p
+          span Sort by:
+          strong(ng-click="ctrl.changeSorting('recent')" ng-class="ctrl.sortActiveClass == 'recent' ? 'on' : '' ") recent
+          span or
+          strong(ng-click="ctrl.changeSorting('hot')" ng-class="ctrl.sortActiveClass == 'hot' ? 'on' : '' ") hot
+    div.header__row.header__search-box(ng-class="ctrl.mobileOptions == true ? 'on' : ''")
+      input(type="text" placeholder="Search questions..." ng-model="ctrl.filterOptions.string.question" ng-focus="ctrl.currentFilter = 'string'")
+      input(type="button" value="search")
+
+section.q-list.main(ng-class="ctrl.mobileOptions == true ? 'on' : ''")
+  div.q-box(ng-repeat="q in ctrl.questions | filter:ctrl.filterOptions[ctrl.currentFilter] | orderBy: ctrl.sortOrder | limitTo: ctrl.questionsLimit")
+    div.q-box__header
+      div.q-box__header__photo(ng-click="ctrl.showUser(q.author_id)" ng-style="{'background-image':'url('+q.author_photo_src+')'}")
+      div.q-box__header__info
+        h3
+          a(href="#") {{ q.author }}
+          span is asking: ({{ q.when }}, {{ q.hot }}, {{ q.my_shelf }})
+        h2
+          a(href="#!/single/{{q.question_id}}") {{ q.question }}
+    div.q-box__activities
+      div.q-box__activities__items
+        div.q-box__activities__item
+          div.q-box__activities__item__info-box asked
+        div.q-box__activities__item
+          div.q-box__activities__item__how-many-left {{ ctrl.howManyLeft(q.comments) - ctrl.someVal }}
+          div.q-box__activities__item__info-box more activities
+        div.q-box__activities__item(ng-repeat="p in q.comments")
+          div.q-box__activities__item__photo-box( ng-style="{'background-image':'url('+p.author_photo_src+')'}" ng-click="ctrl.showUser(p.author_id)")
+          div.q-box__activities__item__info-box asked
+      div.q-box__activities__more-info
+        p
+          strong {{ q.comments.length }}
+          span related discussions
+        p
+          strong {{ q.peers_involved }}
+          span peers involved
+        p
+          strong {{ q.comments.length }}
+          span comments
+  div.addMoreBtn(ng-click="ctrl.addMoreQuestions()" ng-show="ctrl.addMoreQuestionsStatus") + Add more
+div(ng-include="ctrl.includePopup")

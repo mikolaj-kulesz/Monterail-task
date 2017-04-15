@@ -1,0 +1,115 @@
+header.header
+  div.header__row
+    div.header__logo-box
+      a.header__logo-box__logo(href="#")
+      a.header__logo-box__add-question(href="#")
+
+section.q-list.single( ng-init = "sq = ctrl.activeQuestion" )
+  div.q-box.one
+    div.q-box__header
+      div.q-box__header__photo(ng-style="{'background-image':'url('+sq.author_photo_src+')'}" ng-click="ctrl.showUser(sq.author_id)")
+      div.q-box__header__info
+        h3
+          a(href="#") {{ sq.author }}
+          span is asking:
+        h2
+          lorem {{ sq.question }}
+    div.q-box__single
+      div.q-box__single__desc {{ sq.desc }}
+      div.q-box__single__more-info
+        div.q-box__single__more-info__container
+          p
+            strong {{ sq.votes }}
+            span votes
+          div.arrows-box
+            div.arrows-box__arrow.up(ng-click="ctrl.votesUp(sq)")
+            div.arrows-box__arrow.down(ng-click="ctrl.votesDown(sq)")
+
+section.btn-block
+  button.btn-block__btn(type="button" ng-click="ctrl.defaultClick()") GIVE new answer
+
+section.g-comments-block
+  h3.g-comments-block__label
+    strong 2
+    span peers already answered Ewa
+  ul.g-comments
+    li.g-comments__item(ng-repeat="c in sq.comments | filter:{type: 'comment'}")
+      div.g-comments__item__main-part
+        div.g-comments__item__main-part__photo(ng-style="{'background-image':'url('+c.author_photo_src+')'}" ng-click="ctrl.showUser(c.author_id)")
+        div.g-comments__item__main-part__info
+          div.g-comments__item__main-part__info__main
+            a(href="#") {{ c.author }}
+            span commented it
+            strong yesterday
+          div.g-comments__item__main-part__info__desc {{ c.text }}
+      div.g-comments__item__vote
+        p
+          strong {{ c.votes }}
+          span votes
+        div.arrows-box
+          div.arrows-box__arrow.up(ng-click="ctrl.votesUp(c)")
+          div.arrows-box__arrow.down(ng-click="ctrl.votesDown(c)")
+      ul.g-comments
+        li.g-comments__item(ng-repeat="sc in c.sub_comments ")
+          div.g-comments__item__main-part
+            div.g-comments__item__main-part__photo(ng-style="{'background-image':'url('+sc.author_photo_src+')'}" ng-click="ctrl.showUser(sc.author_id)")
+            div.g-comments__item__main-part__info
+              div.g-comments__item__main-part__info__main
+                a(href="#") {{ sc.author }}
+                span commented it
+                strong yesterday
+              div.g-comments__item__main-part__info__desc {{ sc.text }}
+          div.g-comments__item__vote
+            p
+              strong {{ sc.votes }}
+              span votes
+            div.arrows-box
+              div.arrows-box__arrow.up(ng-click="ctrl.votesUp(sc)")
+              div.arrows-box__arrow.down(ng-click="ctrl.votesDown(sc)")
+
+section.btn-block
+  button.btn-block__btn(type="button" ng-click="ctrl.defaultClick()") CONTINUE discussion
+
+section.g-comments-block
+  h3.g-comments-block__label
+    strong linked
+    span discussions
+  ul.g-comments
+    li.g-comments__item(ng-repeat="c in sq.comments | filter:{type: 'discussion'}")
+      div.g-comments__item__main-part
+        div.g-comments__item__main-part__photo(ng-style="{'background-image':'url('+c.author_photo_src+')'}" ng-click="ctrl.showUser(c.author_id)")
+        div.g-comments__item__main-part__info
+          div.g-comments__item__main-part__info__main
+            a(href="#") {{ c.author }}
+            span commented it
+            strong yesterday
+          div.g-comments__item__main-part__info__desc {{ c.text }}
+      div.g-comments__item__vote
+        p
+          strong {{ c.votes }}
+          span votes
+        div.arrows-box
+          div.arrows-box__arrow.up(ng-click="ctrl.votesUp(c)")
+          div.arrows-box__arrow.down(ng-click="ctrl.votesDown(c)")
+      ul.g-comments
+        li.g-comments__item(ng-repeat="sc in c.sub_comments | filter:{type: 'discussion'}")
+          div.g-comments__item__main-part
+            div.g-comments__item__main-part__photo(ng-style="{'background-image':'url('+sc.author_photo_src+')'}" ng-click="ctrl.showUser(sc.author_id)")
+            div.g-comments__item__main-part__info
+              div.g-comments__item__main-part__info__main
+                a(href="#") {{ sc.author }}
+                span commented it
+                strong yesterday
+              div.g-comments__item__main-part__info__desc {{ sc.text }}
+          div.g-comments__item__vote
+            p
+              strong {{ sc.votes }}
+              span votes
+            div.arrows-box
+              div.arrows-box__arrow.up(ng-click="ctrl.votesUp(sc)")
+              div.arrows-box__arrow.down(ng-click="ctrl.votesDown(sc)")
+
+section.btn-block
+  button.btn-block__btn(type="button" ng-click="ctrl.defaultClick()") COMMENT
+
+div(ng-include="ctrl.includePopup")

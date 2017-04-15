@@ -1,0 +1,27 @@
+/* ==========================================================================
+	Variables
+/* ========================================================================== */
+/* Directories */
+$images_dir: '../img/';
+
+/* Fonts */
+$font-primary: 'Playfair Display', serif;
+
+/* Font Sizes */
+$size_base: 16px;
+
+/* Colors */
+$base-color: #fff;
+$light-gray: #999;
+$very-light-gray: #ccc;
+$active-blue: #0266b3;
+$black: #000;
+$white: #fff;
+$light-blue: #dff3fd;
+
+
+/*Media Queries */
+$layout: 'only screen and (max-width: 1200px)';
+$tablet: 'only screen and (max-width: 940px)';
+$mobile: 'only screen and (max-width: 660px)';
+$smobile: 'only screen and (max-width: 360px)';

@@ -1,0 +1,98 @@
+.arrows-box {
+  @include flex-all($fd: column, $jc: space-between);
+
+  &__arrow {
+    display: block;
+    width: 12px;
+    height: 12px;
+    margin: 4px;
+    background: #000;
+    cursor: pointer;
+
+    &:hover, &:active {
+      opacity: 0.8;
+    }
+
+    &.up {
+      background: url($images_dir + 'arrow_up.png') no-repeat top 0 left 0;
+    }
+
+    &.down {
+      background: url($images_dir + 'arrow_down.png') no-repeat top 0 left 0;
+    }
+  }
+}
+
+.btn-block {
+  text-align: center;
+  margin: 20px 0 40px 0;
+
+  .btn-block__btn {
+    display: inline-block;
+    padding: 10px 25px;
+    border: 1px solid $very-light-gray;
+    color: $very-light-gray;
+    cursor: pointer;
+    background: $white;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      border: 1px solid $black;
+      color: $black;
+    }
+  }
+}
+
+.avatar {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: 50% 50%;
+  cursor: pointer;
+}
+
+.avatar-small {
+  @extend .avatar;
+  width: 30px;
+  height: 30px;
+}
+
+.votes-box {
+  @include flex-all($jc:flex-end, $fw: nowrap, $ai: center);
+  width: 130px;
+  padding: 20px;
+  padding-right: 0;
+
+  span {
+    margin: 0 10px 0 4px;
+  }
+}
+
+.activity-level {
+  @include flex-all($fw: nowrap, $ai: center);
+  
+  &__item {
+    display: block;
+    width: 20px;
+    height: 26px;
+    margin-left: 10px;
+    background: url($images_dir + 'level.png') no-repeat top 50% left 50%;
+  }
+
+  @for $i from 1 to 4 {
+    &.lev-#{$i} {
+      .activity-level__item:nth-child(-n+#{$i}){
+        background: url($images_dir + 'level_up.png') no-repeat top 50% left 50%;
+      }
+    }
+  }
+}
+
+.addMoreBtn {
+  padding: 20px 40px;
+  padding-bottom: 60px;
+  font-weight: bold;
+  font-style: italic;
+  cursor: pointer;
+}

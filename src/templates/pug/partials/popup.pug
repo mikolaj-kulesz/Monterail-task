@@ -1,0 +1,68 @@
+div.popup(ng-show="ctrl.popupStatus")
+  div.popup__layout
+    div.popup__layout__container
+      div.popup__layout__container__close-btn(ng-click="ctrl.closePopup()")
+      div.user-detail
+        div.user-detail__header
+          div.user-detail__header__photo(ng-style="{'background-image':'url('+ctrl.activeUser.user_photo_src+')'}")
+          h2.user-detail__header__name {{ ctrl.activeUser.name }}
+          div.user-detail__header__main-info
+            div.user-detail__header__main-info__item
+              span Member for
+              strong {{ ctrl.activeUser.member_for }}
+            div.user-detail__header__main-info__item
+              span Last seen
+              strong {{ ctrl.activeUser.last_seen }}
+            div.user-detail__header__main-info__item
+              span Activity level
+              div.activity-level(ng-class="'lev-'+ctrl.activeUser.activity_level")
+                div.activity-level__item
+                div.activity-level__item
+                div.activity-level__item
+        div.user-detail__title-box
+          div.user-detail__title-box__title
+            div.user-detail__title-box__title__arrow.prev(ng-click="ctrl.prevUser()")
+            h1 How it all started
+            div.user-detail__title-box__title__arrow.next(ng-click="ctrl.nextUser()")
+          h2 {{"That's where we have been these " + ctrl.activeUser.member_for + " ago" }}
+        div.user-detail__big-numbers
+          div.user-detail__big-numbers__item
+            strong {{ ctrl.activeUser.peers }}
+            span peers
+          div.user-detail__big-numbers__item
+            strong {{ ctrl.activeUser.discussions }}
+            span discussions
+          div.user-detail__big-numbers__item
+            strong {{ ctrl.activeUser.findings }}
+            span findings
+          div.user-detail__big-numbers__item
+            strong {{ ctrl.activeUser.questions }}
+            span questions
+        div.user-detail__also-registered
+          h3 lorem ipsum
+          div.user-detail__also-registered__items
+            div.user-detail__also-registered__items__item(ng-repeat="o in ctrl.activeUser.others")
+              div.user-detail__also-registered__items__item__photo(ng-style="{'background-image':'url('+o.user_photo_src+')'}")
+              div.user-detail__also-registered__items__item__name
+                a(href="#") {{ o.name }}
+        div.user-detail__hot-discussion
+          h3 lorem ipsum
+          div.user-detail__hot-discussion__photo(style="background-image: url(http://lorempixel.com/100/100/people/3/)")
+          div.user-detail__hot-discussion__name
+            strong
+              a(href="#") {{ u.hot.name }}
+              span {{ ctrl.activeUser.hot.found }}
+            h4 {{ u.hot.title }}
+            div.user-detail__hot-discussion__numbers
+              div.user-detail__hot-discussion__numbers__item
+                strong {{ ctrl.activeUser.hot.peers }}
+                span peers
+              div.user-detail__hot-discussion__numbers__item
+                strong {{ ctrl.activeUser.hot.discussions }}
+                span discussions
+              div.user-detail__hot-discussion__numbers__item
+                strong {{ u.hot.conversations }}
+                span conversations
+              div.user-detail__hot-discussion__numbers__item
+                strong {{ ctrl.activeUser.hot.votes }}
+                span votes
